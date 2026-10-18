@@ -10,7 +10,7 @@ import boto3
 from botocore.exceptions import BotoCoreError, ClientError
 
 GROQ_CHAT_COMPLETIONS_URL = "https://api.groq.com/openai/v1/chat/completions"
-DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile"
+DEFAULT_GROQ_MODEL = "openai/gpt-oss-120b"
 
 s3_client = boto3.client("s3")
 
