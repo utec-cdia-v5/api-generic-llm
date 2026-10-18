@@ -1,0 +1,30 @@
+service: api-generic-llm
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: python3.14
+  timeout: 25
+  memorySize: 512
+  iam:
+    role: arn:aws:iam::${aws:accountId}:role/LabRole
+  environment:
+    GROQ_API_KEY: ${env:GROQ_API_KEY}
+    GROQ_MODEL: llama-3.3-70b-versatile
+  httpApi:
+    cors: true
+    payload: "2.0"
+
+functions:
+  consulta_texto:
+    handler: consulta_texto.lambda_handler
+    events:
+      - httpApi:
+          method: POST
+          path: /consulta_texto
+  consulta_s3:
+    handler: consulta_s3.lambda_handler
+    events:
+      - httpApi:
+          method: POST
+          path: /consulta_s3
